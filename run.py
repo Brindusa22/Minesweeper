@@ -1,3 +1,5 @@
+from random import randint
+
 
 class GameBoard:
     """
@@ -28,6 +30,23 @@ class GameBoard:
             print(f"{i+1:2} | " + " ".join(self.board[i]))
             print("    " + "----" * self.size)
 
+    def plant_bombs(self):
+        """Plant the bombs at a random location """
 
-game = GameBoard(9, 2)
+        planted_bombs = 0
+
+        while planted_bombs < self.bombs:
+            position = randint(0, self.size**2)
+            row = position // self.size
+            col = position % self.size
+
+            if self.board[row][col] == "* |":
+                continue
+            else:
+                self.board[row][col] = "* |"
+                planted_bombs += 1 
+
+
+game = GameBoard(6, 9)
+# game.plant_bombs()
 game.print_board()
