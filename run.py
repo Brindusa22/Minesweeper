@@ -9,12 +9,25 @@ class GameBoard:
     def __init__(self, size, bombs):
         self.size = size
         self.bombs = bombs
-        self.board = [["." for x in range(size)] for y in range(size)]
-        
-    def print_board(self):
-        for row in self.board:
-            print(" ".join(row))
-            
+        self.board = [["  |" for i in range(self.size)]
+                      for i in range(self.size)]
 
-game = GameBoard(8, 4)
+    def print_board(self):
+        """ Create a representation of the board with squares"""
+
+        # print the column number
+        col_no = "  "
+        for i in range(self.size):
+            col_no = col_no + "   " + str(i+1)
+        print(col_no)
+
+        print("    " + "----" * self.size)
+
+        # add the rows with row numbers and the delimitation between them
+        for i in range(self.size):
+            print(f"{i+1:2} | " + " ".join(self.board[i]))
+            print("    " + "----" * self.size)
+
+
+game = GameBoard(9, 2)
 game.print_board()
