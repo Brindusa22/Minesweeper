@@ -47,8 +47,7 @@ class GameBoard:
                 planted_bombs += 1
 
     def neighboring_bombs(self, row, col):
-        """
-         Identify number of neighboring bombs """
+        """ Identify number of neighboring bombs """
 
         bomb_no = 0
         for x in range(row - 1, row + 2):
@@ -61,10 +60,26 @@ class GameBoard:
 
         return bomb_no
 
+    def add_bomb_number(self):
+        """
+            Add number of bombs to all the cells near a bomb.
+            If there is no bomb around, the cell remains empty.
+        """
+
+        bomb_no = 0
+        for x in range(self.size):
+            for y in range(self.size):
+                if self.board[x][y] == "* |":
+                    continue
+                bomb_no = self.neighboring_bombs(x, y)
+
+                if bomb_no > 0:
+                    self.board[x][y] = f"{ bomb_no} |"
+                else:
+                    self.board[x][y] = "  |"
+
 
 game = GameBoard(6, 9)
 game.plant_bombs()
-row, col = 4, 4
-result = game.neighboring_bombs(row, col)
-print(result)
+game.add_bomb_number()
 game.print_board()
