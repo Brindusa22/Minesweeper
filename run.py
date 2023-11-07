@@ -87,18 +87,30 @@ class GameBoard:
         """   
         
         if self.board[row][col] == "* |":
+            self.show_bombs()
             return False
+
         elif self.board[row][col] == "  |":
             for x in range(row - 1, row + 2):
                 for y in range(col - 1, col + 2):
                     self.handle_cell(x, y)
             return True
+
         else:
             # the cell contains a number
-            return True  
+            return True
+
+    def show_bombs(self):
+        """
+        Show all bombs if the user hit a bomb.
+        """
+        for r in range(self.size):
+            for c in range(self.size):
+                if self.board[r][c] == "* |":
+                    self.board[r][c] = "* |"
 
 
-game = GameBoard(6, 9)
+game = GameBoard(9, 9)
 game.plant_bombs()
 game.add_bomb_number()
 game.print_board()
