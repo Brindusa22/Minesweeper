@@ -78,6 +78,25 @@ class GameBoard:
                 else:
                     self.board[x][y] = "  |"
 
+    def handle_cell(self, row, col):
+        """
+        Checks the content of cells. Returns False if the content
+        is a bomb and True if it is not(if it's a number or an empty
+        cell). If the cell is empty, neighboring cells are recursively
+        checked.
+        """   
+        
+        if self.board[row][col] == "* |":
+            return False
+        elif self.board[row][col] == "  |":
+            for x in range(row - 1, row + 2):
+                for y in range(col - 1, col + 2):
+                    self.handle_cell(x, y)
+            return True
+        else:
+            # the cell contains a number
+            return True  
+
 
 game = GameBoard(6, 9)
 game.plant_bombs()
