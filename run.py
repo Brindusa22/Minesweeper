@@ -81,9 +81,9 @@ class GameBoard:
     def handle_cell(self, row, col):
         """
         Checks the content of cells. Returns False if the content
-        is a bomb and True if it is not(if it's a number or an empty
-        cell). If the cell is empty, neighboring cells are recursively
-        checked.
+        is a bomb and show all the bombs. Return True if the cell is not a bomb
+        (if it's a number or an empty cell) and reveal the cell. If the cell is
+        empty, neighboring cells are recursively checked.
         """   
         
         if self.board[row][col] == "* |":
@@ -98,6 +98,8 @@ class GameBoard:
 
         else:
             # the cell contains a number
+            # reveal that cell
+            self.board[row][col] = self.board[row][col]
             return True
 
     def show_bombs(self):
