@@ -36,13 +36,10 @@ class GameBoard:
         planted_bombs = 0
 
         while planted_bombs < self.bombs:
-            position = randint(0, self.size**2)
-            row = position // self.size
-            col = position % self.size
+            row = randint(0, self.size - 1)
+            col = randint(0, self.size - 1)
 
-            if self.board[row][col] == "* |":
-                continue
-            else:
+            if self.board[row][col] == "  |":
                 self.board[row][col] = "* |"
                 planted_bombs += 1
 
@@ -113,24 +110,25 @@ class GameBoard:
                 if self.board[r][c] == "* |":
                     self.board[r][c] = "* |"
 
+
 def user_input(board):
     """
-    Get the user input and validate the data. If the data can not be converted into 
-    an integer or if the data is outside the game board's boundaries an error
-    is raised. If the input is valid, the function returns the data.
+    Get the user input and validate the data. If the data can not be converted
+    into an integer or if the data is outside the game board's boundaries an 
+    error is raised. If the input is valid, the function returns the data.
     """
     while True:
         try:
             user_row = int(input('Select a row (a number from 0 to 9):\n'))
             if 0 < user_row and user_row > board.size:
-                print('Invalid input. Row must be a number between 0 an 9.\n')
+                print('Invalid input. Row must be a number between 0 and 9.\n')
                 continue
 
             while True:
                 try:
                     user_col = int(input('Select a column (a number from 0 to 9):\n'))
                     if 0 < user_col and user_col > board.size:
-                        print('Invalid input. Column must be a number between 0 an 9.\n')
+                        print('Invalid input. Column must be a number between 0 and 9.\n')
                         continue
 
                     return user_row, user_col
@@ -140,14 +138,15 @@ def user_input(board):
                     continue
 
         except ValueError as e:
-                    print(f'Invalid data: {e}, please try again.\n')
-                    continue
+            print(f'Invalid data: {e}, please try again.\n')
+            continue
 
 
 def play_game(board):
 
     while True:
         board.print_board()
+
         row, col = user_input(board)
 
         if board.handle_cell(row, col):
@@ -155,13 +154,11 @@ def play_game(board):
             break
         else:
             print('Sorry! You lost!')
-            
-
 
 
 game = GameBoard(9, 9)
-# game.plant_bombs()
-# game.add_bomb_number()
+game.plant_bombs()
+game.add_bomb_number()
 # game.print_board()
 # user_input(game)
 play_game(game)
