@@ -119,16 +119,29 @@ def user_input(board):
     """
     while True:
         try:
-            user_row = int(input('Select a row(a number from 0 to 9):\n'))
-            user_col = int(input('Select a column(a number from 0 to 9):\n'))
-            if 0 <= user_row and user_row < board.size and 0 <= user_col and user_col < board.size:
-                return user_row, user_col
-            else:
-                print('Invalid input. Row and column must be between 0 an 9.\n')
+            user_row = int(input('Select a row (a number from 0 to 9):\n'))
+            if 0 < user_row and user_row > board.size:
+                print('Invalid input. Row must be a number between 0 an 9.\n')
+                continue
+
+            while True:
+                try:
+                    user_col = int(input('Select a column (a number from 0 to 9):\n'))
+                    if 0 < user_col and user_col > board.size:
+                        print('Invalid input. Column must be a number between 0 an 9.\n')
+                        continue
+
+                    return user_row, user_col
+
+                except ValueError as e:
+                    print(f'Invalid data: {e}, please try again.\n')
+                    continue
+
         except ValueError as e:
-            print(f'Invalid data: {e}, please try again.\n')
-            continue
-    
+                    print(f'Invalid data: {e}, please try again.\n')
+                    continue
+
+
 def play_game():
 
     board = GameBoard(size, bombs)
