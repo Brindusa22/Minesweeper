@@ -85,7 +85,9 @@ class GameBoard:
         (if it's a number or an empty cell) and reveal the cell. If the cell is
         empty, neighboring cells are recursively checked.
         """   
-        
+        if row >= 0 and row < self.size and col >= 0 and col < self.size:
+            return False
+
         if self.board[row][col] == "* |":
             self.show_bombs()
             return False
@@ -142,15 +144,24 @@ def user_input(board):
                     continue
 
 
-def play_game():
+def play_game(board):
 
-    board = GameBoard(size, bombs)
+    while True:
+        board.print_board()
+        row, col = user_input(board)
 
+        if board.handle_cell(row, col):
+            print('Congratulations!')
+            break
+        else:
+            print('Sorry! You lost!')
+            
 
 
 
 game = GameBoard(9, 9)
-game.plant_bombs()
-game.add_bomb_number()
-game.print_board()
-user_input(game)
+# game.plant_bombs()
+# game.add_bomb_number()
+# game.print_board()
+# user_input(game)
+play_game(game)
