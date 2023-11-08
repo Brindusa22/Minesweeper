@@ -111,8 +111,33 @@ class GameBoard:
                 if self.board[r][c] == "* |":
                     self.board[r][c] = "* |"
 
+def user_input(board):
+    """
+    Get the user input and validate the data. If the data can not be converted into 
+    an integer or if the data is outside the game board's boundaries an error
+    is raised. If the input is valid, the function returns the data.
+    """
+    while True:
+        try:
+            user_row = int(input('Select a row(a number from 0 to 9):\n'))
+            user_col = int(input('Select a column(a number from 0 to 9):\n'))
+            if 0 <= user_row and user_row < board.size and 0 <= user_col and user_col < board.size:
+                return user_row, user_col
+            else:
+                print('Invalid input. Row and column must be between 0 an 9.\n')
+        except ValueError as e:
+            print(f'Invalid data: {e}, please try again.\n')
+            continue
+    
+def play_game():
+
+    board = GameBoard(size, bombs)
+
+
+
 
 game = GameBoard(9, 9)
 game.plant_bombs()
 game.add_bomb_number()
 game.print_board()
+user_input(game)
