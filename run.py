@@ -13,6 +13,7 @@ class GameBoard:
         self.bombs = bombs
         self.board = [["  |" for i in range(self.size)]
                       for i in range(self.size)]
+        self.visible_board = False
 
     def print_board(self):
         """ Create a representation of the board with squares"""
@@ -27,6 +28,12 @@ class GameBoard:
 
         # add the rows with row numbers and the delimitation between them
         for i in range(self.size):
+            row_content = []
+            for j in range(self.size):
+                if self.visible_board:
+                    row_content.append(self.board[i][j])
+                else:
+                    row_content.append("  |")
             print(f"{i:2} | " + " ".join(self.board[i]))
             print("    " + "----" * self.size)
 
@@ -90,6 +97,7 @@ class GameBoard:
             return False
 
         elif self.board[row][col] == "  |":
+            self.board[row][col] = "  |"
             for x in range(row - 1, row + 2):
                 for y in range(col - 1, col + 2):
                     self.handle_cell(x, y)
@@ -143,22 +151,28 @@ def user_input(board):
 
 
 def play_game(board):
+    
+    board.print_board()
+    board.plant_bombs()
+    board.add_bomb_number()
 
     while True:
-        board.print_board()
 
         row, col = user_input(board)
 
         if board.handle_cell(row, col):
+            board.visible_board = True
+            board.print_board()
             print('Congratulations!')
             break
         else:
+            board.visible_board = True
+            board.print_board()
             print('Sorry! You lost!')
+            break
 
 
 game = GameBoard(9, 9)
-game.plant_bombs()
-game.add_bomb_number()
 # game.print_board()
 # user_input(game)
 play_game(game)
