@@ -89,7 +89,7 @@ class GameBoard:
         (if it's a number or an empty cell) and reveal the cell. If the cell is
         empty, neighboring cells are recursively checked.
         """   
-        if row >= 0 and row < self.size and col >= 0 and col < self.size:
+        if not (0 <= row < self.size and 0 <= col < self.size):
             return False
 
         if self.board[row][col] == "* |":
