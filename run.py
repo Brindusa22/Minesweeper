@@ -51,13 +51,12 @@ class GameBoard:
         """ Identify number of neighboring bombs """
 
         bomb_no = 0
-        for x in range(row - 1, row + 2):
-            for y in range(col - 1, col + 2):
+        for x in range(max(0, row - 1), min(self.size-1, row + 2)):
+            for y in range(max(0, col - 1), min(self.size-1, col + 2)):
                 if x == row and y == col:
                     continue
-                if 0 <= x < self.size and 0 <= y < self.size:
-                    if self.board[x][y] == "* |":
-                        bomb_no += 1
+                if self.board[x][y] == "* |":
+                    bomb_no += 1
 
         return bomb_no
 
@@ -77,7 +76,7 @@ class GameBoard:
                 if bomb_no > 0:
                     self.board[x][y] = f"{ bomb_no}"
                 else:
-                    self.board[x][y] = "  |"
+                    self.board[x][y] = "0"
 
     def handle_cell(self, row, col):
         """
@@ -96,8 +95,8 @@ class GameBoard:
         elif self.board[row][col] == "  |":
             self.visible_board[row][col] = f"{self.neighboring_bombs(row, col)}"
             if self.neighboring_bombs(row, col) == 0:
-                for x in range(row - 1, row + 2):
-                    for y in range(col - 1, col + 2):
+                for x in range(max(0, row - 1), min(self.size-1, row+2)):
+                    for y in range(max(0, col - 1), min(self.size-1, col+2)):
                         self.handle_cell(x, y)
                 return True
 
@@ -123,6 +122,7 @@ class GameBoard:
                 if self.board[r][c] != "* |" and self.visible_board[r][c] == "  |":
                     return False          
         return True
+
 
 def user_input(board):
     """
@@ -170,6 +170,4 @@ def play_game(board):
 
 
 game = GameBoard(9, 9)
-# game.print_board()
-# user_input(game)
 play_game(game)
