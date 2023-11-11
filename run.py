@@ -17,6 +17,7 @@ class GameBoard:
                               for i in range(self.size)]
         self.plant_bombs()
         self.add_bomb_number()
+        self.revealed = set()
 
     def print_board(self):
         """ Create a representation of the board with squares"""
@@ -51,8 +52,8 @@ class GameBoard:
         """ Identify number of neighboring bombs """
 
         bomb_no = 0
-        for x in range(max(0, row - 1), min(self.size-1, row + 2)):
-            for y in range(max(0, col - 1), min(self.size-1, col + 2)):
+        for x in range(max(0, row - 1), min(self.size-1, row + 1)+1):
+            for y in range(max(0, col - 1), min(self.size-1, col + 1)+1):
                 if x == row and y == col:
                     continue
                 if self.board[x][y] == "* |":
@@ -82,23 +83,32 @@ class GameBoard:
         """
         Checks the content of cells. Returns False if the content
         is a bomb and show all the bombs. Return True if the cell is not a bomb
-        (if it's a number or an empty cell) and reveal the cell. If the cell is
-        empty, neighboring cells are recursively checked.
+        (if it's a number) and reveal the cell. If the number of the cell is 0,
+        neighboring cells are recursively checked. The cell that has already 
+        been opened is stored into a set to check and prevent the loop to recur
+        on itself
         """   
         if not (0 <= row < self.size and 0 <= col < self.size):
             return False
+
+        self.revealed.add((row, col))
 
         if self.board[row][col] == "* |":
             self.show_bombs()
             return False
 
-        elif self.board[row][col] == "  |":
-            self.visible_board[row][col] = f"{self.neighboring_bombs(row, col)}"
-            if self.neighboring_bombs(row, col) == "0":
-                for x in range(max(0, row - 1), min(self.size-1, row+2)):
-                    for y in range(max(0, col - 1), min(self.size-1, col+2)):
-                        self.handle_cell(x, y)
-                return True
+        elif self.board[row][col] == "0":
+            self.visible_board[row][col] = "0 |"
+
+            # recursion loop logic was inspired from the Youtube tutorial:
+            # tutorial link: https://www.youtube.com/watch?v=Fjw7Lc9zlyU
+            for x in range(max(0, row - 1), min(self.size-1, row+1)+1):
+                for y in range(max(0, col - 1), min(self.size-1, col+1)+1):
+                    if (x, y) in self.revealed:
+                        continue
+                    self.handle_cell(x, y)
+                    
+            return True
 
         else:
             # the cell contains a number
