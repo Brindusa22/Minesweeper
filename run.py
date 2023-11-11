@@ -15,6 +15,8 @@ class GameBoard:
                       for i in range(self.size)]
         self.visible_board = [["  |" for i in range(self.size)]
                               for i in range(self.size)]
+        self.plant_bombs()
+        self.add_bomb_number()
 
     def print_board(self):
         """ Create a representation of the board with squares"""
@@ -114,6 +116,13 @@ class GameBoard:
                 if self.board[r][c] == "* |":
                     self.visible_board[r][c] = "* |"
 
+    def check_winning(self):
+
+        for r in range(self.size):
+            for c in range(self.size):
+                if self.board[r][c] != "* |" and self.visible_board[r][c] == "  |":
+                    return False          
+        return True
 
 def user_input(board):
     """
@@ -147,22 +156,16 @@ def user_input(board):
 
 
 def play_game(board):
-    
-    board.print_board()
-    board.plant_bombs()
-    board.add_bomb_number()
 
     while True:
-
+        board.print_board()
         row, col = user_input(board)
 
-        if board.handle_cell(row, col):
-            board.print_board()
-            print('Congratulations!')
+        if not board.handle_cell(row, col):
+            print('Sorry! You Lost')
             break
-        else:
-            board.print_board()
-            print('Sorry! You lost!')
+        elif board.check_winning():
+            print('Congratulations')
             break
 
 
