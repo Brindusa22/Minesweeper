@@ -94,7 +94,7 @@ class GameBoard:
 
         elif self.board[row][col] == "  |":
             self.visible_board[row][col] = f"{self.neighboring_bombs(row, col)}"
-            if self.neighboring_bombs(row, col) == 0:
+            if self.neighboring_bombs(row, col) == "0":
                 for x in range(max(0, row - 1), min(self.size-1, row+2)):
                     for y in range(max(0, col - 1), min(self.size-1, col+2)):
                         self.handle_cell(x, y)
@@ -114,6 +114,8 @@ class GameBoard:
             for c in range(self.size):
                 if self.board[r][c] == "* |":
                     self.visible_board[r][c] = "* |"
+                else:
+                    self.visible_board[r][c] = f"{self.neighboring_bombs(r, c)} |"
 
     def check_winning(self):
 
@@ -162,6 +164,7 @@ def play_game(board):
         row, col = user_input(board)
 
         if not board.handle_cell(row, col):
+            board.print_board()
             print('Sorry! You Lost')
             break
         elif board.check_winning():
