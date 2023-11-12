@@ -32,7 +32,7 @@ class GameBoard:
         print("    " + "----" * self.size)
 
         # add the rows with row numbers and the delimitation between them
-        for i in range(self.size):  
+        for i in range(self.size):
             print(f"{i:2} | " + " ".join(self.visible_board[i]))
             print("    " + "----" * self.size)
 
@@ -85,10 +85,10 @@ class GameBoard:
         Checks the content of cells. Returns False if the content
         is a bomb and show all the bombs. Return True if the cell is not a bomb
         (if it's a number) and reveal the cell. If the number of the cell is 0,
-        neighboring cells are recursively checked. The cell that has already 
+        neighboring cells are recursively checked. The cell that has already
         been opened is stored into a set to check and prevent the loop to recur
         on itself
-        """   
+        """
         if not (0 <= row < self.size and 0 <= col < self.size):
             return False
 
@@ -108,7 +108,6 @@ class GameBoard:
                     if (x, y) in self.revealed:
                         continue
                     self.handle_cell(x, y)
-                    
             return True
 
         else:
@@ -126,14 +125,16 @@ class GameBoard:
                 if self.board[r][c] == "* |":
                     self.visible_board[r][c] = "* |"
                 else:
-                    self.visible_board[r][c] = f"{self.neighboring_bombs(r, c)} |"
+                    self.visible_board[r][c] = (
+                        f"{self.neighboring_bombs(r, c)} |")
 
     def check_winning(self):
 
         for r in range(self.size):
             for c in range(self.size):
-                if self.board[r][c] != "* |" and self.visible_board[r][c] == "  |":
-                    return False       
+                if self.board[r][c] != "* |" and self.visible_board[r][c] == (
+                     "  |"):
+                    return False
         return True
 
 
@@ -162,7 +163,7 @@ def choose_level():
                 print("Invalid level! Type 1 or 2!")
 
         except ValueError:
-            print("Invalid data! You must select a number: 1 or 2") 
+            print("Invalid data! You must select a number: 1 or 2")
 
 
 def user_input(board):
@@ -197,7 +198,7 @@ def user_input(board):
                         print()
                         break
 
-                    board.selected_numbers.add((user_row, user_col))    
+                    board.selected_numbers.add((user_row, user_col))
                     return user_row, user_col
 
                 except ValueError:
