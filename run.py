@@ -221,9 +221,11 @@ def play_game(board):
         if not board.handle_cell(row, col):
             board.print_board()
             print('Oh nooo! You hit a bomb!:( Better luck next time!')
+            print()
             break
         elif board.check_winning():
             print('Congratulations! You have uncovered all cells! :)')
+            print()
             break
 
 
@@ -232,17 +234,21 @@ def new_game():
     Starts a new game. Sets the board size and bomb numbers according to level.
     Prints the instructions.
     """
-    print("--" * 35)
-    print("Welcome to MINESWEEPER!")
-    print("--" * 35)
-    print('Uncover all the cells on the board without hitting any bombs.')
-    print()
-    print('Choose your level: Beginner(9x9 board, 9 bombs) or Expert(15x15 '
-          'board, 15 bombs)')
-    print()
-    size, bombs = choose_level()
-    game = GameBoard(size, bombs)
-    play_game(game)
+    while True:
+
+        print()
+        print("--" * 40)
+        print("Welcome to MINESWEEPER!")
+        print("--" * 40)
+        print('Uncover all the cells on the board without hitting any bombs.')
+        print()
+        print('Choose your level: Beginner(9x9 board, 9 bombs) or Expert'
+              '(15x15 board, 15 bombs)')
+        print()
+
+        size, bombs = choose_level()
+        game = GameBoard(size, bombs)
+        play_game(game)
 
 
 new_game()
