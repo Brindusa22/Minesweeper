@@ -220,11 +220,11 @@ def play_game(board):
 
         if not board.handle_cell(row, col):
             board.print_board()
+            print()
             print('Oh nooo! You hit a bomb!:( Better luck next time!')
             print()
             break
         elif board.check_winning():
-            print()
             print()
             print('Congratulations! You have uncovered all cells! :)')
             print()
