@@ -18,6 +18,7 @@ class GameBoard:
         self.plant_bombs()
         self.add_bomb_number()
         self.revealed = set()
+        self.selected_numbers = set()
 
     def print_board(self):
         """ Create a representation of the board with squares"""
@@ -139,31 +140,40 @@ class GameBoard:
 def user_input(board):
     """
     Get the user input and validate the data. If the data can not be converted
-    into an integer or if the data is outside the game board's boundaries an 
+    into an integer(it is not a number), or if the same data(coordinates) have
+    already been used, or if the data is outside the game board's boundaries an
     error is raised. If the input is valid, the function returns the data.
     """
+
     while True:
         try:
             user_row = int(input('Select a row (a number from 0 to 9):\n'))
-            if 0 < user_row and user_row > board.size:
+            if 0 < user_row and user_row >= board.size:
                 print('Invalid input. Row must be a number between 0 and 9.\n')
                 continue
 
             while True:
                 try:
                     user_col = int(input('Select a column (a number from 0 to 9):\n'))
-                    if 0 < user_col and user_col > board.size:
+                    if 0 < user_col and user_col >= board.size:
                         print('Invalid input. Column must be a number between 0 and 9.\n')
                         continue
 
+                    if (user_row, user_col) in board.selected_numbers:
+                        print('You have already selected these coordinates!\n'
+                              'Please select new ones!')
+                        print()
+                        break
+
+                    board.selected_numbers.add((user_row, user_col))    
                     return user_row, user_col
 
-                except ValueError as e:
-                    print(f'Invalid data: {e}, please try again.\n')
+                except ValueError:
+                    print(f'Invalid data! You must enter a number!\n')
                     continue
 
-        except ValueError as e:
-            print(f'Invalid data: {e}, please try again.\n')
+        except ValueError:
+            print(f'Invalid data! You must enter a number!\n')
             continue
 
 
@@ -182,5 +192,5 @@ def play_game(board):
             break
 
 
-game = GameBoard(9, 9)
+game = GameBoard(10, 9)
 play_game(game)
