@@ -175,18 +175,20 @@ def user_input(board):
 
     while True:
         try:
-            user_row = int(input('Select a row (a number from 0 to 9):\n'))
+            user_row = int(input(f'Select a row (a number from 0 to '
+                                 f'{board.size - 1}):\n'))
             if 0 < user_row and user_row >= board.size:
-                print('Invalid input. Row must be a number between 0 and 9.\n')
+                print(f'Invalid input. Row must be a number between 0 '
+                      f'and {board.size - 1}.\n')
                 continue
 
             while True:
                 try:
-                    user_col = int(input('Select a column (a number from 0 to\
-                                          9):\n'))
+                    user_col = int(input(f'Select a column(a number from 0 to '
+                                         f'{board.size - 1}): \n'))
                     if 0 < user_col and user_col >= board.size:
-                        print('Invalid input. Column must be a number between\
-                               0 and 9.\n')
+                        print(f'Invalid input. Column must be a number between'
+                              f'0 and {board.size - 1}.\n')
                         continue
 
                     if (user_row, user_col) in board.selected_numbers:
