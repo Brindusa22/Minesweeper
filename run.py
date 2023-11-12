@@ -133,7 +133,7 @@ class GameBoard:
         for r in range(self.size):
             for c in range(self.size):
                 if self.board[r][c] != "* |" and self.visible_board[r][c] == "  |":
-                    return False          
+                    return False       
         return True
 
 
@@ -154,9 +154,11 @@ def user_input(board):
 
             while True:
                 try:
-                    user_col = int(input('Select a column (a number from 0 to 9):\n'))
+                    user_col = int(input('Select a column (a number from 0 to\
+                                          9):\n'))
                     if 0 < user_col and user_col >= board.size:
-                        print('Invalid input. Column must be a number between 0 and 9.\n')
+                        print('Invalid input. Column must be a number between\
+                               0 and 9.\n')
                         continue
 
                     if (user_row, user_col) in board.selected_numbers:
@@ -192,5 +194,14 @@ def play_game(board):
             break
 
 
-game = GameBoard(10, 9)
-play_game(game)
+def new_game():
+
+    print("--" * 35)
+    print("Welcome to MINESWEEPER!")
+    print("--" * 35)
+    print()
+    game = GameBoard(10, 9)
+    play_game(game)
+
+
+new_game()
