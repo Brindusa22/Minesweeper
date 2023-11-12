@@ -3,9 +3,9 @@ from random import randint
 
 class GameBoard:
     """
-    Main game board class. Sets the board size, plants random bombs,
-    prints the game instructions. Has methods to uncover the cells,
-    to calculate the neighbour cells and to check if the game is won or lost
+    Main game board class. Sets the board size, plants random bombs.
+    Has methods to uncover the cells,
+    to calculate the neighbouring cells and to check if the game is won or lost
     """
 
     def __init__(self, size, bombs):
@@ -146,8 +146,8 @@ def choose_level():
 
     while True:
         try:
-            level = int(input("Select a level: 1 Beginner or 2 Exepert\n"
-                              "Select 1 or 2:\n"))
+            level = int(input("Select a level: 1.Beginner or 2.Exepert\n"
+                              "Type 1 or 2:\n"))
             if level == 1:
                 GameBoard.size = 9
                 GameBoard.bombs = 9
@@ -159,10 +159,10 @@ def choose_level():
                 return GameBoard.size, GameBoard.bombs
 
             else:
-                print("Invalid level! Select 1 or 2!")
+                print("Invalid level! Type 1 or 2!")
 
         except ValueError:
-            print("Invalid data! You must select a number: 1 or 2")    
+            print("Invalid data! You must select a number: 1 or 2") 
 
 
 def user_input(board):
@@ -225,10 +225,17 @@ def play_game(board):
 
 
 def new_game():
-
+    """
+    Starts a new game. Sets the board size and bomb numbers according to level.
+    Prints the instructions.
+    """
     print("--" * 35)
     print("Welcome to MINESWEEPER!")
     print("--" * 35)
+    print('Uncover all the cells on the board without hitting any bombs.')
+    print()
+    print('Choose your level: Beginner(9x9 board, 9 bombs) or Expert(15x15 '
+          'board, 15 bombs)')
     print()
     size, bombs = choose_level()
     game = GameBoard(size, bombs)
