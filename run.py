@@ -210,6 +210,9 @@ def user_input(board):
 
 
 def play_game(board):
+    """
+    Main game loop.
+    """
 
     while True:
         board.print_board()
@@ -217,10 +220,10 @@ def play_game(board):
 
         if not board.handle_cell(row, col):
             board.print_board()
-            print('Sorry! You Lost')
+            print('Oh nooo! You hit a bomb!:( Better luck next time!')
             break
         elif board.check_winning():
-            print('Congratulations')
+            print('Congratulations! You have uncovered all cells! :)')
             break
 
 
