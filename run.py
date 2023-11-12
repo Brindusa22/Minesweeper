@@ -26,7 +26,7 @@ class GameBoard:
         # print the column number
         col_no = "  "
         for i in range(self.size):
-            col_no = col_no + "   " + str(i)
+            col_no = col_no + '  ' + f"{str(i):>2}"
         print(col_no)
 
         print("    " + "----" * self.size)
@@ -137,6 +137,34 @@ class GameBoard:
         return True
 
 
+def choose_level():
+    """
+    Ask the user to select a number corresponding to a level. Set the size
+    of the board and the number of bombs accordingly. Validate the
+    user input.
+    """
+
+    while True:
+        try:
+            level = int(input("Select a level: 1 Beginner or 2 Exepert\n"
+                              "Select 1 or 2:\n"))
+            if level == 1:
+                GameBoard.size = 9
+                GameBoard.bombs = 9
+                return GameBoard.size, GameBoard.bombs
+
+            elif level == 2:
+                GameBoard.size = 15
+                GameBoard.bombs = 15
+                return GameBoard.size, GameBoard.bombs
+
+            else:
+                print("Invalid level! Select 1 or 2!")
+
+        except ValueError:
+            print("Invalid data! You must select a number: 1 or 2")    
+
+
 def user_input(board):
     """
     Get the user input and validate the data. If the data can not be converted
@@ -200,7 +228,8 @@ def new_game():
     print("Welcome to MINESWEEPER!")
     print("--" * 35)
     print()
-    game = GameBoard(10, 9)
+    size, bombs = choose_level()
+    game = GameBoard(size, bombs)
     play_game(game)
 
 
