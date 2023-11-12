@@ -155,7 +155,7 @@ def choose_level():
 
             elif level == 2:
                 GameBoard.size = 15
-                GameBoard.bombs = 15
+                GameBoard.bombs = 35
                 return GameBoard.size, GameBoard.bombs
 
             else:
@@ -224,6 +224,8 @@ def play_game(board):
             print()
             break
         elif board.check_winning():
+            print()
+            print()
             print('Congratulations! You have uncovered all cells! :)')
             print()
             break
@@ -243,7 +245,7 @@ def new_game():
         print('Uncover all the cells on the board without hitting any bombs.')
         print()
         print('Choose your level: Beginner(9x9 board, 9 bombs) or Expert'
-              '(15x15 board, 15 bombs)')
+              '(15x15 board, 35 bombs)')
         print()
 
         size, bombs = choose_level()
