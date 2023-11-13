@@ -4,8 +4,10 @@ from random import randint
 class GameBoard:
     """
     Main game board class. Sets the board size, plants random bombs.
-    Has methods to uncover the cells,
-    to calculate the neighbouring cells and to check if the game is won or lost
+    Has methods to calculate the number of neighbouring bombs of a cell,
+    to add numbers to cells representing the number of bombs arround,
+    to uncover cells, to reveal all the bombs and to check if the game is won
+    or lost.
     """
 
     def __init__(self, size, bombs):
@@ -21,7 +23,9 @@ class GameBoard:
         self.selected_numbers = set()
 
     def print_board(self):
-        """ Create a representation of the board with squares"""
+        """
+        Creates a representation of the board with squares.
+        """
 
         # print the column number
         col_no = "  "
@@ -37,7 +41,9 @@ class GameBoard:
             print("    " + "----" * self.size)
 
     def plant_bombs(self):
-        """Plant the bombs at a random location """
+        """
+        Plants the bombs at a random location.
+        """
 
         planted_bombs = 0
 
@@ -50,7 +56,9 @@ class GameBoard:
                 planted_bombs += 1
 
     def neighboring_bombs(self, row, col):
-        """ Identify number of neighboring bombs """
+        """
+        Identifies number of neighboring bombs.
+        """
 
         bomb_no = 0
         for x in range(max(0, row - 1), min(self.size-1, row + 1)+1):
@@ -64,8 +72,8 @@ class GameBoard:
 
     def add_bomb_number(self):
         """
-            Add number of bombs to all the cells near a bomb.
-            If there is no bomb around, the cell remains empty.
+        Adds number of bombs to all the cells near a bomb.
+        If there is no bomb around, a zero is added.
         """
 
         bomb_no = 0
@@ -83,11 +91,11 @@ class GameBoard:
     def handle_cell(self, row, col):
         """
         Checks the content of cells. Returns False if the content
-        is a bomb and show all the bombs. Return True if the cell is not a bomb
-        (if it's a number) and reveal the cell. If the number of the cell is 0,
-        neighboring cells are recursively checked. The cell that has already
-        been opened is stored into a set to check and prevent the loop to recur
-        on itself
+        is a bomb and shows all the bombs.Returns True if the cell is not a
+        bomb(if it's a number) and reveals the cell. If the number of the cell
+        is 0,neighboring cells are recursively checked. The cell that has
+        already been opened is stored into a set to check and prevent the loop
+        to recur on itself.
         """
         if not (0 <= row < self.size and 0 <= col < self.size):
             return False
@@ -118,8 +126,10 @@ class GameBoard:
 
     def show_bombs(self):
         """
-        Show all bombs if the user hit a bomb.
+        Shows all bombs if the user hits a bomb. If the cell is not a bomb,
+        it updates the user's board with the number of neighbouring bombs.
         """
+
         for r in range(self.size):
             for c in range(self.size):
                 if self.board[r][c] == "* |":
@@ -129,7 +139,11 @@ class GameBoard:
                         f"{self.neighboring_bombs(r, c)} |")
 
     def check_winning(self):
-
+        """
+        Checks the winning condition. If the bombs have not been revealed
+        and there are no more uncovered no bomb cells on the user's board,
+        returns True(the game is won).
+        """
         for r in range(self.size):
             for c in range(self.size):
                 if self.board[r][c] != "* |" and self.visible_board[r][c] == (
@@ -140,8 +154,8 @@ class GameBoard:
 
 def choose_level():
     """
-    Ask the user to select a number corresponding to a level. Set the size
-    of the board and the number of bombs accordingly. Validate the
+    Asks the user to select a number corresponding to a level. Set the size
+    of the board and the number of bombs accordingly. Validates the
     user input.
     """
 
@@ -163,15 +177,15 @@ def choose_level():
                 print("Invalid level! Type 1 or 2!")
 
         except ValueError:
-            print("Invalid data! You must select a number: 1 or 2")
+            print("Invalid data! You must select a number: 1 or 2.")
 
 
 def user_input(board):
     """
-    Get the user input and validate the data. If the data can not be converted
+    Gets the user input and validates the data.If the data can not be converted
     into an integer(it is not a number), or if the same data(coordinates) have
-    already been used, or if the data is outside the game board's boundaries an
-    error is raised. If the input is valid, the function returns the data.
+    already been used, or if the data is outside the game board's boundaries,
+    an error is raised. If the input is valid, the function returns the data.
     """
 
     while True:
@@ -186,7 +200,7 @@ def user_input(board):
             while True:
                 try:
                     user_col = int(input(f'Select a column(a number from 0 to '
-                                         f'{board.size - 1}): \n'))
+                                         f'{board.size - 1}):\n'))
                     if 0 < user_col and user_col >= board.size:
                         print(f'Invalid input. Column must be a number between'
                               f'0 and {board.size - 1}.\n')
