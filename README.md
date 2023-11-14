@@ -111,9 +111,24 @@ These atributes are then used to create a new instance of the _GameBoard_ (which
 
 ### Validator Testing
 
+- PEP8
+    - No errors were returned from PEP8 Python Validator.
 
+    ![PEP8 Python Validator](assets/images/validator.png)
 
 ## Deployment
 
 
 ## Credits
+
+- To solve the issue with the numbering of cells and columns I have fund information and examples about the alignment of strings in Python here: 
+
+    https://www.tutorialspoint.com/how-to-align-text-strings-using-python
+
+- To create a representation of the game board with cells, i have found inspiration here:
+
+    https://www.askpython.com/python/examples/create-minesweeper-using-python 
+
+- To implement the recursion I have watched this youtube tutorial(code taken from here for the recursion loop is also marked with a comment above it):
+
+    https://www.youtube.com/watch?v=Fjw7Lc9zlyU
