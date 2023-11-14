@@ -82,7 +82,7 @@ The logic of this game was planned and structured in diagrams with [Lucidchart](
 
 ## Programming Model
 
-I have used a GameBoard class to iniialize the board and store its size and number of bombs.
+I have used a GameBoard class to initialize the board and store its size and number of bombs.
 
 It has methods to create a representation of the board with square cells, numbered row and columns and print it.
 I have initialized two instances of the game board: the actual board(_self.board_) and the updated board that the user sees(*self.visible_board*).
@@ -126,7 +126,7 @@ I have manually tested this project by doing the following:
 
 ## Deployment
 
-This project was deployed using Code INstitute's mock terminal for Heroku.
+This project was deployed using Code Institute's mock terminal for Heroku.
 
 - Steps to deployment:
     - Fork or clone this repository
