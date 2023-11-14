@@ -53,7 +53,24 @@ The logic of this game was planned and structured in diagrams with [Lucidchart](
 
 - Input validation and error checking
 
+    - The player cannot select another level other then 1 or 2.
+    - The player must enter numbers and not other characters.
 
+    ![Input validation levels](assets/images/input_validation1.png)
+
+    - The player cannot enter coordinates outside the size of the board.
+    - The player must enter numbers and not other characters.
+    - Rows and columns are checked individually.
+
+    ![Input validation coordinates](assets/images/input_validation2.png) 
+
+    - The player cannot select the same coordinates twice.
+
+    ![Input validation same coordinates](assets/images/input_validation3.png)
+
+    - If the cell has already been revealed due to recursion, the player cannot use the coordinates of that cell again.
+
+    ![Input validation recursion](assets/images/input_validation4.png)
 
 ### Future Features
 
