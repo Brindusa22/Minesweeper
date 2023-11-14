@@ -97,14 +97,20 @@ These atributes are then used to create a new instance of the _GameBoard_ (which
 
 ### Bugs
 
-
 #### Solved Bugs
+
+- When I have created the representation of the board I had spacing issues with adding numbers to rows and columns. The numbers were positioned outside the corresponding row/column. To solve this, I have done a research on _Google_ on how to manipulate strings alignment in _Python_ and I have used this method: f"{str(i):>2} which has aligned the column number to the right, with 2 spaces and It has created the right amount of sapce to position it above each column in the middle.
+
+- I have struggled with the implementation of the recursion.I was getting an indexing error. After numerous attempts, I have searched a tutorial on how to achieve that and I have learned that i had to add a min and max to the range in the recursion loop to solve the problem.
+
+- While testing the input validation I have noticed that the player could infinitely select the same coordinates, which were not previously selected. This happened when the player selected a cell that had been uncovered due to recursion. To fix this, I have added another statement to the function that handles the user input, which checkes with the help of another function(_cell_already_revealed()) if the selected cell is empty on the visible board. If it is not empty, it means it has already been revealed and it cannot be revealed twice, so an error is raised.
 
 #### Unsolved Bugs
 
-
+- There are no unsolved bugs.
 
 ### Validator Testing
+
 
 
 ## Deployment
