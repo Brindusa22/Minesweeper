@@ -79,6 +79,18 @@ The logic of this game was planned and structured in diagrams with [Lucidchart](
 
 ## Programming Model
 
+I have used a GameBoard class to iniialize the board and store its size and number of bombs.
+
+It has methods to create a representation of the board with square cells, numbered row and columns and print it.
+I have initialized two instances of the game board: the actual board(_self.board_) and the updated board that the user sees(*self.visible_board*).
+
+The class has methods to plant bombs at a random location, to calculate the number of neighbouring bombs of a cell and to add numbers to cells(representing the number of neighbouring bombs of that cell).
+It also has a method to handle the cells, which updates the content of the cells on the palyer's board(*visible_board*) and which also contains the recursion logic.
+
+It has a method to reveal all the bombs on the board if the user selects a cell containing a bomb and a method to check if the game is won.
+
+Outside the GameBoard class I have defined functions to validate the user's input and to update the GameBoard class attributs _size_ and _bombs_ according to the level that the player selects. 
+These atributes are then used to create a new instance of the _GameBoard_ (which is stored into a variable) and the new game starts with the parameters that the player chose.
 
 ## Testing
 
