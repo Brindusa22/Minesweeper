@@ -74,6 +74,8 @@ The logic of this game was planned and structured in diagrams with [Lucidchart](
 
 ### Future Features
 
+- Implement a flag system and allow the player to mark an empty cell with an  _F_ , to indicate a potential bomb.
+- Allow the player to play against computer.
 
 ## Programming Model
 
