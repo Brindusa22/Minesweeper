@@ -32,6 +32,7 @@ The logic of this game was planned and structured in diagrams with [Lucidchart](
 - Levels:
     - The game begins with a brief guidance prompting the player to choose between two levels of difficulty.
     - The first level has a 9x9 board and 9 bombs and the second a 15x15 board and 35 bombs.
+
     ![Levels](assets/images/levels.png)
 
 - Place bombs at a random location and assign numbers to cells:
@@ -39,7 +40,7 @@ The logic of this game was planned and structured in diagrams with [Lucidchart](
     - After choosing the level the player can see the empty board and is prompted to select the coordinates of a cell.
     - The rows and columns are numbered to make it easier for the player to find the coordinates of a cell:
 
-    ![Initial empty board](assets/images/empty_board.png) 
+    ![Initial empty board](assets/images/initial_board.png) 
 
 - Bombs are represented by _*_
 - Recursion was used for the cells that contain a _0_: these cells do not have a neighboring bomb, so all the cells around them are automatically revealed, until a cell that has a bomb around is found:

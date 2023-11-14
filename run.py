@@ -161,7 +161,7 @@ def choose_level():
 
     while True:
         try:
-            level = int(input("Select a level: 1.Beginner or 2.Exepert\n"
+            level = int(input("Select a level: 1.Beginner or 2.Expert\n"
                               "Type 1 or 2:\n"))
             if level == 1:
                 GameBoard.size = 9
