@@ -5,7 +5,9 @@ It is a single-player puzzle game, a terminal version of the classic, well-known
 depending on the palyer's skill level: beginner or advanced. The rows and columns are numbered so that the users
 can easily choose the coordinates of the cell they want to uncover.
 
-The live version of this project can be found (here).
+The live version of this project can be found [here](https://minesweeper-enthusiast-c555da1e6402.herokuapp.com/).
+
+![Project preview](assets/images/final_project.png)
 
 ## How to play
 
@@ -95,6 +97,11 @@ These atributes are then used to create a new instance of the _GameBoard_ (which
 
 ## Testing
 
+I have manually tested this project by doing the following:
+
+- Passed the code through PEP8 linter and no errors were found.
+- Tested the game bothe in my local terminal and the Code Institute Heroku terminal.
+- Introduced all the possible invalid inputs: levels other than the existent ones, numbers out of board's borders, strings, same cell coordinates, coordinates for cells uncovered with recursion. 
 
 ### Bugs
 
@@ -118,6 +125,21 @@ These atributes are then used to create a new instance of the _GameBoard_ (which
     ![PEP8 Python Validator](assets/images/validator.png)
 
 ## Deployment
+
+This project was deployed using Code INstitute's mock terminal for Heroku.
+
+- Steps to deployment:
+    - Fork or clone this repository
+    - Create a new Heroku app
+    - Set the buildbacks to _Python_ and _NodeJS_ in that order
+    - Search for the name of the repository
+    - Connect the Heroku app to the repository
+    - Select _Automatic Deploys_
+    - Click on _Deploy_
+
+The link to my deployed project:
+
+https://minesweeper-enthusiast-c555da1e6402.herokuapp.com/
 
 
 ## Credits
