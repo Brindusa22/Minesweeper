@@ -193,7 +193,7 @@ def user_input(board):
             user_row = int(input(f'Select a row (a number from 0 to '
                                  f'{board.size - 1}):\n'))
             if 0 < user_row and user_row >= board.size:
-                print(f'Invalid input. Row must be a number between 0 '
+                print(f'Invalid input! Row must be a number between 0 '
                       f'and {board.size - 1}.\n')
                 continue
 
@@ -202,7 +202,8 @@ def user_input(board):
                     user_col = int(input(f'Select a column(a number from 0 to '
                                          f'{board.size - 1}):\n'))
                     if 0 < user_col and user_col >= board.size:
-                        print(f'Invalid input. Column must be a number between'
+                        print(f'Invalid input! '
+                              'Column must be a number between '
                               f'0 and {board.size - 1}.\n')
                         continue
 
