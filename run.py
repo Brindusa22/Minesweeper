@@ -180,6 +180,17 @@ def choose_level():
             print("Invalid data! You must select a number: 1 or 2.")
 
 
+def cell_already_revealed(board, row, col):
+    """
+    Returns True if a cell on the user's board is not empty.
+    Helper function used at input validation(if the cell on the board
+    is not empty, it means it has already been revealed and can not be
+    selected again).
+    """
+    if board.visible_board[row][col] != "  |":
+        return True
+
+
 def user_input(board):
     """
     Gets the user input and validates the data.If the data can not be converted
@@ -210,6 +221,12 @@ def user_input(board):
                     if (user_row, user_col) in board.selected_numbers:
                         print('You have already selected these coordinates!\n'
                               'Please select new ones!')
+                        print()
+                        break
+
+                    if cell_already_revealed(board, user_row, user_col):
+                        print('Cell already uncovered!\n'
+                              'Please select new cell!')
                         print()
                         break
 
